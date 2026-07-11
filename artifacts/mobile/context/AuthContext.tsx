@@ -39,16 +39,21 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       if (firebaseUser) {
         // Check admin via Firestore role field (set role:"admin" on user doc in Firebase console)
         // Also accepts legacy custom claim for backward compatibility
+        // Hardcoded admin emails — always get admin access regardless of Firestore/claims
+        const ADMIN_EMAILS = ['aki.sokpah.link@gmail.com'];
         try {
+          const emailAdmin = Boolean(firebaseUser.email && ADMIN_EMAILS.includes(firebaseUser.email.toLowerCase()));
           const [token, snap] = await Promise.all([
             firebaseUser.getIdTokenResult(),
             getDoc(doc(db, 'users', firebaseUser.uid)),
           ]);
           const claimAdmin = Boolean(token.claims.admin);
           const firestoreAdmin = snap.exists() && snap.data()?.role === 'admin';
-          setIsAdmin(claimAdmin || firestoreAdmin);
+          setIsAdmin(emailAdmin || claimAdmin || firestoreAdmin);
         } catch {
-          setIsAdmin(false);
+          // Even if Firestore/token fails, still grant access by email
+          const ADMIN_EMAILS_FALLBACK = ['aki.sokpah.link@gmail.com'];
+          setIsAdmin(Boolean(firebaseUser.email && ADMIN_EMAILS_FALLBACK.includes(firebaseUser.email.toLowerCase())));
         }
       } else {
         setIsAdmin(false);

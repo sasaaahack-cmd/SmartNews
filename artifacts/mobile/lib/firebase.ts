@@ -11,7 +11,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 // Public-safe Firebase config (frontend-only values)
 const firebaseConfig = {
-  apiKey: 'AIzaSyBJ6Zw2pgismaiKfc3lFp_hJTNpqHmYjm0',
+  apiKey: 'AIzaSyBJ6w2pgismaiKfc3lFp_hJTNpqHmYjm0',
   authDomain: 'gen-lang-client-0598563022.firebaseapp.com',
   projectId: 'gen-lang-client-0598563022',
   storageBucket: 'gen-lang-client-0598563022.firebasestorage.app',
