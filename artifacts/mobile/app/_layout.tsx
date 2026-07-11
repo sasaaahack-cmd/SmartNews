@@ -6,6 +6,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { ErrorBoundary } from '@/components/ErrorBoundary';
 import { AuthProvider } from '@/context/AuthContext';
 import { SavedProvider } from '@/context/SavedContext';
+import { SubscriptionProvider } from '@/context/SubscriptionContext';
 import {
   Inter_400Regular,
   Inter_500Medium,
@@ -31,6 +32,8 @@ function RootLayoutNav() {
     <Stack screenOptions={{ headerBackTitle: 'Back' }}>
       <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
       <Stack.Screen name="article" options={{ headerShown: false }} />
+      <Stack.Screen name="subscription" options={{ headerShown: false }} />
+      <Stack.Screen name="admin" options={{ headerShown: false }} />
       <Stack.Screen
         name="auth/sign-in"
         options={{ presentation: 'modal', title: 'Sign In', headerShown: true }}
@@ -70,9 +73,11 @@ export default function RootLayout() {
           <GestureHandlerRootView>
             <KeyboardProvider>
               <AuthProvider>
-                <SavedProvider>
-                  <RootLayoutNav />
-                </SavedProvider>
+                <SubscriptionProvider>
+                  <SavedProvider>
+                    <RootLayoutNav />
+                  </SavedProvider>
+                </SubscriptionProvider>
               </AuthProvider>
             </KeyboardProvider>
           </GestureHandlerRootView>

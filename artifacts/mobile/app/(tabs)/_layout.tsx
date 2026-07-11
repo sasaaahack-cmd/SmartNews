@@ -19,6 +19,10 @@ function NativeTabLayout() {
         <Icon sf={{ default: 'magnifyingglass', selected: 'magnifyingglass' }} />
         <Label>Discover</Label>
       </NativeTabs.Trigger>
+      <NativeTabs.Trigger name="media">
+        <Icon sf={{ default: 'play.rectangle', selected: 'play.rectangle.fill' }} />
+        <Label>Media</Label>
+      </NativeTabs.Trigger>
       <NativeTabs.Trigger name="saved">
         <Icon sf={{ default: 'bookmark', selected: 'bookmark.fill' }} />
         <Label>Saved</Label>
@@ -60,9 +64,7 @@ function ClassicTabLayout() {
               style={StyleSheet.absoluteFill}
             />
           ) : isWeb ? (
-            <View
-              style={[StyleSheet.absoluteFill, { backgroundColor: colors.background }]}
-            />
+            <View style={[StyleSheet.absoluteFill, { backgroundColor: colors.background }]} />
           ) : null,
       }}
     >
@@ -87,6 +89,18 @@ function ClassicTabLayout() {
               <SymbolView name="magnifyingglass" tintColor={color} size={24} />
             ) : (
               <Feather name="search" size={22} color={color} />
+            ),
+        }}
+      />
+      <Tabs.Screen
+        name="media"
+        options={{
+          title: 'Media',
+          tabBarIcon: ({ color }) =>
+            isIOS ? (
+              <SymbolView name="play.rectangle" tintColor={color} size={24} />
+            ) : (
+              <Feather name="film" size={22} color={color} />
             ),
         }}
       />
