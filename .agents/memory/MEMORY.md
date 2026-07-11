@@ -1,2 +1,4 @@
 - [Expo Router nested dynamic routes](expo-router-nested-routes.md) — dynamic routes in subdirs need their own `_layout.tsx` for Expo Router discovery; root Stack uses group name (`article`), not `article/[id]`.
 - [Mixed font families in Expo](expo-mixed-fonts.md) — combine Inter + Lora in one `useFonts()` call imported from one package; root `_layout.tsx` hides splash only after fonts load.
+- [SmartNews feature map](smartnews-features.md) — full feature inventory: 5 tabs, 4 subscription tiers, admin panel, media, payment stub.
+- [Git push with PAT](git-pat-push.md) — use token in remote URL, clear it immediately after push; gitPush() callback only works if user connected GitHub account to Replit.
