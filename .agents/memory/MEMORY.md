@@ -1,0 +1,2 @@
+- [Expo Router nested dynamic routes](expo-router-nested-routes.md) — dynamic routes in subdirs need their own `_layout.tsx` for Expo Router discovery; root Stack uses group name (`article`), not `article/[id]`.
+- [Mixed font families in Expo](expo-mixed-fonts.md) — combine Inter + Lora in one `useFonts()` call imported from one package; root `_layout.tsx` hides splash only after fonts load.
