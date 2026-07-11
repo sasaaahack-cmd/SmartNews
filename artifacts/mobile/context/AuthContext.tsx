@@ -37,9 +37,19 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
       setUser(firebaseUser);
       if (firebaseUser) {
-        // Check admin claim via token
-        const token = await firebaseUser.getIdTokenResult();
-        setIsAdmin(Boolean(token.claims.admin));
+        // Check admin via Firestore role field (set role:"admin" on user doc in Firebase console)
+        // Also accepts legacy custom claim for backward compatibility
+        try {
+          const [token, snap] = await Promise.all([
+            firebaseUser.getIdTokenResult(),
+            getDoc(doc(db, 'users', firebaseUser.uid)),
+          ]);
+          const claimAdmin = Boolean(token.claims.admin);
+          const firestoreAdmin = snap.exists() && snap.data()?.role === 'admin';
+          setIsAdmin(claimAdmin || firestoreAdmin);
+        } catch {
+          setIsAdmin(false);
+        }
       } else {
         setIsAdmin(false);
       }
